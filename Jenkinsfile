@@ -22,7 +22,7 @@ pipeline {
                 body: "${env.BUILD_URL}"
         }
         
-        sucess {
+        success {
             echo 'This will only run if successful'
         }
         
