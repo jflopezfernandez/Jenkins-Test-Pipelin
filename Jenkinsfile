@@ -12,6 +12,10 @@ pipeline {
     post {
         always {
             echo 'This will always run'
+            
+            mail to: 'jflopezfernandez@gmail.com',
+                subject: "Build Complete: ${currentBuild.fullDisplayName}",
+                body: "${env.BUILD_URL}"
         }
         
         sucess {
@@ -20,6 +24,10 @@ pipeline {
         
         failure {
             echo 'This will run only if failed'
+            
+            slackSend channel: '#general',
+                color: 'bad',
+                message: "The pipeline ${currentBuild.fullDisplayName} failed."
         }
         
         unstable {
